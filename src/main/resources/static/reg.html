@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+    <link rel="stylesheet" href="css/reg.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.9/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+<div class="container">
+
+    <form class="reg-form">
+        <h2>注册</h2>
+        <input type="text" placeholder="11位手机号" id = "phone" v-model = "phone">
+        <input type="password" placeholder="6-11位密码" id = "pass" v-model = "passcode">
+        <input type="password" placeholder="确认密码" id = "repass" >
+        <div>
+            <label class="gender">性别：男</label><input type="radio" name = "gender" value="1" class = "gender" v-model = "gender">
+            <label class="gender">女</label><input type="radio" name = "gender" value="2" class = "gender" v-model = "gender">
+        </div>
+        <input type="text" id = "nick" placeholder="昵称不能超过12个字符" v-model = "nick">
+        <button v-on:click="validate" type="button" class="large-btn" id = "button" >立刻注册</button>
+    </form>
+
+    <div class="msg">
+        <b><p id = "uphonespan" style="color: red;text-align: center"></p></b>
+        <b><p id = "respan" style="color: red;text-align: center"></p></b>
+        <b><p id = "passspan" style="color: red;text-align: center"></p></b>
+        <b><p id = "nickspan" style="color: red;text-align: center"></p></b>
+
+    </div>
+</div>
+
+</body>
+<script src="js/reg.js"></script>
+</html>

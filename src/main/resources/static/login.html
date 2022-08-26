@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.9/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <form class = "login-form">
+        <h2>登录</h2>
+        <input type = "text" name = "username" placeholder="手机号" v-model = "phone1">
+        <input type = "password" name = "password" placeholder="密码" v-model = "password1">
+        <button v-on:click="login" type="button" class = "btn1" id = "btn1">{{text}}</button>
+    </form>
+</div>
+</body>
+<script src="js/login.js"></script>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        let fname = "";
+        window.onload = function(){
+            // http://127.0.0.1:8083/imgshow.html?fname=e3c0967c-b876-427e-806c-bfa7f7f2973c.jpg
+
+            let path = window.location.href;
+            let pos = path.indexOf("?");
+            let paramstr = path.substring(pos+ 1, path.length);
+            let params = paramstr.split("&");
+            // fname=e3c0967c-b876-427e-806c-bfa7f7f2973c.jpg
+
+            for(let i = 0; i< params.length; i++){
+                let kv = params[i].split("=");
+                if(kv[0] == "fname"){
+                    document.getElementById("imgshow").src = "imgs/"+kv[1];
+                    fname = kv[1];
+                    return;
+                }
+            }
+        }
+
+        function callOut(){
+            // 在子窗体中调用 父窗体（top 顶层窗体）的方法
+            alert("上传成功");
+            window.top.fromOut(fname);
+        }
+    </script>
+
+    <!--    <style>-->
+    <!--        .imgshow{-->
+    <!--            width: 200px;-->
+    <!--            height: 300px;-->
+    <!--        }-->
+    <!--    </style>-->
+</head>
+<body>
+<img onload="callOut()" id="imgshow" src="" class="imgshow" >
+
+</body>
+</html>

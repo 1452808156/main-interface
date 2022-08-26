@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>盲盒交换才快乐</title>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+    <script>
+
+        window.onload = function(){
+            let toolbar = new Vue({
+                el:"#headtoolbar",
+                data:{
+                    hasuser: false,
+                    user: ""
+                },
+                mounted(){
+                    axios({
+                        method:"get",
+                        url: "getcurruser"
+                    }).then(resp => {
+                        if(resp.data != ""){
+                            this.hasuser = true;
+                            this.user = resp.data.phone;
+                        }else{
+                            this.hasuser = false;
+                        }
+                    });
+                },
+                methods:{
+
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+
+    <!-- head toolbar -->
+    <div class="head-toolbar" id="headtoolbar">
+        <div style="height: content-box; line-height: 25px;">
+            <ul>
+                <span v-if="hasuser">
+                    <li>欢迎, {{user}}. <a href="exit">退出</a></li>
+                    <li> | </li>
+                    <li><a href="publish.html">发布商品</a></li>
+                    <li> | </li>
+                    <li>我的订单</li>
+                    <li> | </li>
+                    <li>盒塘社区</li>
+                    <li> | </li>
+                    <li>客户服务</li>
+                </span>
+                <span v-else>
+                <li>欢迎, 游客 <a href="login.html">登录</a> / <a href="reg.html">注册</a></li>
+                </span>
+
+            </ul>
+        </div>
+
+    </div>
+</body>
+
+</html>

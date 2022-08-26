@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script>
+        let product;
+        window.onload = function (){
+            product = new Vue({
+                el:"#product-form",
+                data:{
+                    pname: "",
+                    desp: "",
+                    sprice: 0.00,
+                    tprice: 0.00,
+                    imga:""
+                },
+                methods:{
+                    letusgo(){
+                        document.forms[0].submit();
+                    },
+                    publish(){
+                        axios({
+                            method: "post",
+                            data: this.$data,
+                            url: "pub"
+                        }).then(resp =>{
+                            alert(resp.data);
+                        });
+                    }
+                }
+            });
+        }
+
+        function fromOut(fname){
+            product.$data.imga = fname;
+        }
+    </script>
+
+</head>
+<body>
+<div class="container" >
+    <header class="codrops-header">
+        <h1>发布商品</h1>
+    </header>
+    <section class="content">
+        <p>
+        <span class="input input--hoshi">
+					<input class="input__field input__field--hoshi" type="text" v-model="pname" />
+					<label class="input__label input__label--hoshi input__label--hoshi-color-3" >
+						<span class="input__label-content input__label-content--hoshi">名称</span>
+					</label>
+				</span>
+        </p>
+        <p>
+        <span class="input input--hoshi">
+					<input class="input__field input__field--hoshi" type="text" v-model="desp"/>
+					<label class="input__label input__label--hoshi input__label--hoshi-color-3" >
+						<span class="input__label-content input__label-content--hoshi">简介</span>
+					</label>
+				</span>
+        </p>
+        <p>
+        <span class="input input--hoshi">
+					<input class="input__field input__field--hoshi" type="text"  v-model="sprice"/>
+					<label class="input__label input__label--hoshi input__label--hoshi-color-1" >
+						<span class="input__label-content input__label-content--hoshi">原价（元）</span>
+					</label>
+				</span>
+        </p>
+        <p>
+        <span class="input input--hoshi">
+					<input class="input__field input__field--hoshi" type="text" />
+					<label class="input__label input__label--hoshi input__label--hoshi-color-2" v-model="tprice">
+						<span class="input__label-content input__label-content--hoshi">标价(元）</span>
+					</label>
+				</span>
+        </p>
+    </section>
+    <script src="js/classie.js"></script>
+    <script>
+        (function() {
+            if (!String.prototype.trim) {
+                (function() {
+                    // Make sure we trim BOM and NBSP
+                    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                    String.prototype.trim = function() {
+                        return this.replace(rtrim, '');
+                    };
+                })();
+            }
+
+            [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+                // in case the input is already filled..
+                if( inputEl.value.trim() !== '' ) {
+                    classie.add( inputEl.parentNode, 'input--filled' );
+                }
+
+                // events:
+                inputEl.addEventListener( 'focus', onInputFocus );
+                inputEl.addEventListener( 'blur', onInputBlur );
+            } );
+
+            function onInputFocus( ev ) {
+                classie.add( ev.target.parentNode, 'input--filled' );
+            }
+
+            function onInputBlur( ev ) {
+                if( ev.target.value.trim() === '' ) {
+                    classie.remove( ev.target.parentNode, 'input--filled' );
+                }
+            }
+        })();
+    </script>
+</div>
+
+<div id="product-form">
+    <p>
+    <form target="imgshow" action="uploadimg" method="post" enctype="multipart/form-data">
+        图片：<input v-on:change="letusgo" type="file" name="uploadfilea" value="请选择图片">
+    </form>
+    </p>
+    <p>
+        <iframe id="imgshow" name="imgshow" class="imgshow" scrolling="no">
+
+        </iframe>
+    </p>
+
+    <button v-on:click="publish">发布商品</button>
+
+</div>
+
+</body>
+
+</html>
